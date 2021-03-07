@@ -47,5 +47,5 @@ Pod::Spec.new do |spec|
   spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
 
   spec.dependency 'HyBid', '2.4.1'
-  spec.dependency 'Google-Mobile-Ads-SDK', '7.65.0'
+  spec.dependency 'Google-Mobile-Ads-SDK', '7.69.0'
 end
