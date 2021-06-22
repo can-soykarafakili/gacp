@@ -22,6 +22,35 @@
 
 #import "HyBidDFPUtils.h"
 
+NSString *const PNLiteDFPAdapterKeyZoneID = @"pn_zone_id";
+
 @implementation HyBidDFPUtils
+
++ (BOOL)areExtrasValid:(NSString *)extras {
+    if ([HyBidDFPUtils zoneID:extras]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (NSString *)zoneID:(NSString *)extras {
+    return [HyBidDFPUtils valueWithKey:PNLiteDFPAdapterKeyZoneID fromExtras:extras];
+}
+
++ (NSString *)valueWithKey:(NSString *)key
+                fromExtras:(NSString *)extras {
+    NSString *result = nil;
+    NSData *jsonData = [extras dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSMutableDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                      options:0
+                                                                        error:&error];
+    if (!error) {
+        result = (NSString *)dictionary[key];
+    }
+    
+    return result;
+}
 
 @end

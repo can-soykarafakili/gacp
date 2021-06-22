@@ -24,4 +24,8 @@
 
 @implementation HyBidAdMobMediationMRectCustomEvent
 
+- (HyBidAdSize *)adSize {
+    return HyBidAdSize.SIZE_300x250;
+}
+
 @end

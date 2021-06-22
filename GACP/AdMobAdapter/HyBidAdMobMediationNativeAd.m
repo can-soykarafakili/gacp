@@ -20,15 +20,15 @@
 //  THE SOFTWARE.
 //
 
-#import "HyBidGADNativeAd.h"
+#import "HyBidAdMobMediationNativeAd.h"
 
-@interface HyBidGADNativeAd () <HyBidNativeAdDelegate>
+@interface HyBidAdMobMediationNativeAd () <HyBidNativeAdDelegate>
 
 @property(nonatomic, strong) HyBidNativeAd *nativeAd;
 
 @end
 
-@implementation HyBidGADNativeAd
+@implementation HyBidAdMobMediationNativeAd
 
 @synthesize advertiser, extraAssets, store, price;
 
@@ -76,7 +76,10 @@
     return self.nativeAd.contentInfo;
 }
 
-- (void)didRenderInView:(UIView *)view clickableAssetViews:(NSDictionary<GADNativeAssetIdentifier,UIView *> *)clickableAssetViews nonclickableAssetViews:(NSDictionary<GADNativeAssetIdentifier,UIView *> *)nonclickableAssetViews viewController:(UIViewController *)viewController {
+- (void)didRenderInView:(UIView *)view
+    clickableAssetViews:(NSDictionary<GADUnifiedNativeAssetIdentifier,UIView *> *)clickableAssetViews
+ nonclickableAssetViews:(NSDictionary<GADUnifiedNativeAssetIdentifier,UIView *> *)nonclickableAssetViews
+         viewController:(UIViewController *)viewController {
     [self.nativeAd startTrackingView:view withDelegate:self];
 }
 

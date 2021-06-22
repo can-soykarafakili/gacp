@@ -20,10 +20,9 @@
 //  THE SOFTWARE.
 //
 
-#import "HyBidGADLeaderboardCustomEvent.h"
+#import "HyBidAdMobMediationBannerCustomEvent.h"
 
-DEPRECATED_MSG_ATTRIBUTE("Use HyBidGADLeaderboardCustomEvent instead.")
-
-@interface HyBidAdMobMediationLeaderboardCustomEvent : HyBidGADLeaderboardCustomEvent
+/// This class is kept for backwards compatibility.
+@interface HyBidAdMobMediationLeaderboardCustomEvent : HyBidAdMobMediationBannerCustomEvent
 
 @end

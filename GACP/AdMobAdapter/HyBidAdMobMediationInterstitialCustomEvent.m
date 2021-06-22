@@ -21,7 +21,77 @@
 //
 
 #import "HyBidAdMobMediationInterstitialCustomEvent.h"
+#import "HyBidAdMobUtils.h"
+
+@interface HyBidAdMobMediationInterstitialCustomEvent() <HyBidInterstitialAdDelegate>
+
+@property (nonatomic, strong) HyBidInterstitialAd *interstitialAd;
+
+@end
 
 @implementation HyBidAdMobMediationInterstitialCustomEvent
+
+@synthesize delegate;
+
+- (void)dealloc {
+    self.interstitialAd = nil;
+}
+
+- (void)requestInterstitialAdWithParameter:(NSString * _Nullable)serverParameter
+                                     label:(NSString * _Nullable)serverLabel
+                                   request:(nonnull GADCustomEventRequest *)request {
+    if ([HyBidAdMobUtils areExtrasValid:serverParameter]) {
+        if ([HyBidAdMobUtils appToken:serverParameter] != nil && [[HyBidAdMobUtils appToken:serverParameter] isEqualToString:[HyBidSettings sharedInstance].appToken]) {
+            self.interstitialAd = [[HyBidInterstitialAd alloc] initWithZoneID:[HyBidAdMobUtils zoneID:serverParameter] andWithDelegate:self];
+            self.interstitialAd.isMediation = YES;
+            [self.interstitialAd load];
+        } else {
+            [self invokeFailWithMessage:@"The provided app token doesn't match the one used to initialise HyBid."];
+            return;
+        }
+        
+    } else {
+        [self invokeFailWithMessage:@"Failed interstitial ad fetch. Missing required server extras."];
+        return;
+    }
+}
+
+- (void)presentFromRootViewController:(nonnull UIViewController *)rootViewController {
+    [self.delegate customEventInterstitialWillPresent:self];
+    if ([self.interstitialAd respondsToSelector:@selector(showFromViewController:)]) {
+        [self.interstitialAd showFromViewController:rootViewController];
+    } else {
+        [self.interstitialAd show];
+    }
+}
+
+- (void)invokeFailWithMessage:(NSString *)message {
+    [HyBidLogger errorLogFromClass:NSStringFromClass([self class]) fromMethod:NSStringFromSelector(_cmd) withMessage:message];
+    [self.delegate customEventInterstitial:self didFailAd:[NSError errorWithDomain:message code:0 userInfo:nil]];
+}
+
+#pragma mark - HyBidInterstitialAdDelegate
+
+- (void)interstitialDidLoad {
+    [self.delegate customEventInterstitialDidReceiveAd:self];
+}
+
+- (void)interstitialDidFailWithError:(NSError *)error {
+    [self invokeFailWithMessage:error.localizedDescription];
+}
+
+- (void)interstitialDidTrackClick {
+    [self.delegate customEventInterstitialWasClicked:self];
+    [self.delegate customEventInterstitialWillLeaveApplication:self];
+}
+
+- (void)interstitialDidTrackImpression {
+
+}
+
+- (void)interstitialDidDismiss {
+    [self.delegate customEventInterstitialWillDismiss:self];
+    [self.delegate customEventInterstitialDidDismiss:self];
+}
 
 @end

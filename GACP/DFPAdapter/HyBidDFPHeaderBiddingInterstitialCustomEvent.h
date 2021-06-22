@@ -20,10 +20,11 @@
 //  THE SOFTWARE.
 //
 
-#import "HyBidGAMInterstitialCustomEvent.h"
+#import <Foundation/Foundation.h>
+#import <HyBid/HyBid.h>
 
-DEPRECATED_MSG_ATTRIBUTE("Use HyBidGAMInterstitialCustomEvent instead.")
+@import GoogleMobileAds;
 
-@interface HyBidDFPHeaderBiddingInterstitialCustomEvent : HyBidGAMInterstitialCustomEvent
+@interface HyBidDFPHeaderBiddingInterstitialCustomEvent : NSObject <GADCustomEventInterstitial>
 
 @end
