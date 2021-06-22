@@ -1,5 +1,5 @@
 //
-//  Copyright © 2018 PubNative. All rights reserved.
+//  Copyright © 2020 PubNative. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,12 @@
 //  THE SOFTWARE.
 //
 
-#import "HyBidDFPHeaderBiddingInterstitialCustomEvent.h"
+#import <Foundation/Foundation.h>
 
-@implementation HyBidDFPHeaderBiddingInterstitialCustomEvent
+@interface HyBidGADUtils : NSObject
+
++ (BOOL)areExtrasValid:(NSString *)extras;
++ (NSString *)appToken:(NSString *)extras;
++ (NSString *)zoneID:(NSString *)extras;
 
 @end

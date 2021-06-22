@@ -25,9 +25,9 @@
 
 @import GoogleMobileAds;
 
-@interface HyBidAdMobMediationNativeAd : NSObject <GADMediatedUnifiedNativeAd>
+@interface HyBidGADBannerCustomEvent : NSObject <GADCustomEventBanner>
 
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithHyBidNativeAd:(HyBidNativeAd *)nativeAd
-                nativeAdViewAdOptions:(GADNativeAdViewAdOptions *)nativeAdViewAdOptions NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) HyBidAdSize *adSize;
+
 @end
+

@@ -20,12 +20,10 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "HyBidGADUtils.h"
 
-@interface HyBidAdMobUtils : NSObject
+DEPRECATED_MSG_ATTRIBUTE("Use HyBidGADUtils instead.")
 
-+ (BOOL)areExtrasValid:(NSString *)extras;
-+ (NSString *)appToken:(NSString *)extras;
-+ (NSString *)zoneID:(NSString *)extras;
+@interface HyBidAdMobUtils : HyBidGADUtils
 
 @end
