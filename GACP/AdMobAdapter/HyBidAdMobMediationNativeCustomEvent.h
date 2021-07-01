@@ -20,11 +20,10 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <HyBid/HyBid.h>
+#import "HyBidGADNativeCustomEvent.h"
 
-@import GoogleMobileAds;
+DEPRECATED_MSG_ATTRIBUTE("Use HyBidGADNativeCustomEvent instead.")
 
-@interface HyBidAdMobMediationNativeCustomEvent : NSObject <GADCustomEventNativeAd>
+@interface HyBidAdMobMediationNativeCustomEvent : HyBidGADNativeCustomEvent
 
 @end

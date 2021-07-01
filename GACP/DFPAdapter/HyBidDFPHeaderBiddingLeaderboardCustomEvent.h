@@ -20,12 +20,10 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import "HyBidDFPHeaderBiddingBannerCustomEvent.h"
+#import "HyBidGAMLeaderboardCustomEvent.h"
 
-@import GoogleMobileAds;
+DEPRECATED_MSG_ATTRIBUTE("Use HyBidGAMLeaderboardCustomEvent instead.")
 
-/// This class is kept for backwards compatibility.
-@interface HyBidDFPHeaderBiddingLeaderboardCustomEvent : HyBidDFPHeaderBiddingBannerCustomEvent
+@interface HyBidDFPHeaderBiddingLeaderboardCustomEvent : HyBidGAMLeaderboardCustomEvent
 
 @end

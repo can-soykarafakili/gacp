@@ -1,5 +1,5 @@
 //
-//  Copyright © 2018 PubNative. All rights reserved.
+//  Copyright © 2020 PubNative. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,37 @@
 //  THE SOFTWARE.
 //
 
-#import "HyBidDFPHeaderBiddingInterstitialCustomEvent.h"
+#import "HyBidGAMUtils.h"
 
-@implementation HyBidDFPHeaderBiddingInterstitialCustomEvent
+NSString *const PNLiteGAMAdapterKeyZoneID = @"pn_zone_id";
+
+@implementation HyBidGAMUtils
+
++ (BOOL)areExtrasValid:(NSString *)extras {
+    if ([HyBidGAMUtils zoneID:extras]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (NSString *)zoneID:(NSString *)extras {
+    return [HyBidGAMUtils valueWithKey:PNLiteGAMAdapterKeyZoneID fromExtras:extras];
+}
+
++ (NSString *)valueWithKey:(NSString *)key
+                fromExtras:(NSString *)extras {
+    NSString *result = nil;
+    NSData *jsonData = [extras dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSMutableDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                      options:0
+                                                                        error:&error];
+    if (!error) {
+        result = (NSString *)dictionary[key];
+    }
+    
+    return result;
+}
 
 @end

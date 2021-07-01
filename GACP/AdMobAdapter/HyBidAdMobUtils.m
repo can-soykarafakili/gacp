@@ -22,40 +22,6 @@
 
 #import "HyBidAdMobUtils.h"
 
-NSString *const HyBidAdMobAdapterKeyZoneID = @"pn_zone_id";
-NSString *const HyBidAdMobAdapterKeyAppToken = @"pn_app_token";
-
 @implementation HyBidAdMobUtils
-
-+ (BOOL)areExtrasValid:(NSString *)extras {
-    if ([HyBidAdMobUtils zoneID:extras] && [HyBidAdMobUtils appToken:extras]) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-+ (NSString *)appToken:(NSString *)extras {
-    return [HyBidAdMobUtils valueWithKey:HyBidAdMobAdapterKeyAppToken fromExtras:extras];
-}
-
-+ (NSString *)zoneID:(NSString *)extras {
-    return [HyBidAdMobUtils valueWithKey:HyBidAdMobAdapterKeyZoneID fromExtras:extras];
-}
-
-+ (NSString *)valueWithKey:(NSString *)key
-                fromExtras:(NSString *)extras {
-    NSString *result = nil;
-    NSData *jsonData = [extras dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error;
-    NSMutableDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                      options:0
-                                                                        error:&error];
-    if (!error) {
-        result = (NSString *)dictionary[key];
-    }
-    
-    return result;
-}
 
 @end

@@ -21,68 +21,7 @@
 //
 
 #import "HyBidAdMobMediationBannerCustomEvent.h"
-#import "HyBidAdMobUtils.h"
-
-@interface HyBidAdMobMediationBannerCustomEvent() <HyBidAdViewDelegate>
-
-@property (nonatomic, strong) HyBidAdView *bannerAdView;
-
-@end
 
 @implementation HyBidAdMobMediationBannerCustomEvent
-
-@synthesize delegate;
-
-- (void)dealloc {
-    self.bannerAdView = nil;
-    self.adSize = nil;
-}
-
-- (void)requestBannerAd:(GADAdSize)adSize
-              parameter:(NSString * _Nullable)serverParameter
-                  label:(NSString * _Nullable)serverLabel
-                request:(nonnull GADCustomEventRequest *)request {
-    if ([HyBidAdMobUtils areExtrasValid:serverParameter]) {
-        if ([HyBidAdMobUtils appToken:serverParameter] != nil && [[HyBidAdMobUtils appToken:serverParameter] isEqualToString:[HyBidSettings sharedInstance].appToken]) {
-            self.bannerAdView = [[HyBidAdView alloc] initWithSize:self.adSize];
-            self.bannerAdView.isMediation = YES;
-            [self.bannerAdView loadWithZoneID:[HyBidAdMobUtils zoneID:serverParameter] andWithDelegate:self];
-        } else {
-            [self invokeFailWithMessage:@"The provided app token doesn't match the one used to initialise HyBid."];
-            return;
-        }
-    } else {
-        [self invokeFailWithMessage:@"Failed banner ad fetch. Missing required server extras."];
-        return;
-    }
-}
-
-- (void)invokeFailWithMessage:(NSString *)message {
-    [HyBidLogger errorLogFromClass:NSStringFromClass([self class]) fromMethod:NSStringFromSelector(_cmd) withMessage:message];
-    [self.delegate customEventBanner:self didFailAd:[NSError errorWithDomain:message code:0 userInfo:nil]];
-}
-
-- (HyBidAdSize *)adSize {
-    return HyBidAdSize.SIZE_320x50;
-}
-
-#pragma mark - HyBidAdViewDelegate
-
-- (void)adViewDidLoad:(HyBidAdView *)adView {
-    [self.delegate customEventBanner:self didReceiveAd:adView];
-}
-
-- (void)adView:(HyBidAdView *)adView didFailWithError:(NSError *)error {
-    [self invokeFailWithMessage:error.localizedDescription];
-}
-
-- (void)adViewDidTrackImpression:(HyBidAdView *)adView {
-    
-}
-
-- (void)adViewDidTrackClick:(HyBidAdView *)adView {
-    [self.delegate customEventBannerWasClicked:self];
-    [self.delegate customEventBannerWillLeaveApplication:self];
-}
 
 @end

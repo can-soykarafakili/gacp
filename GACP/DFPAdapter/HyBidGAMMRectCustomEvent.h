@@ -20,14 +20,9 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <HyBid/HyBid.h>
+#import "HyBidGAMBannerCustomEvent.h"
 
-@import GoogleMobileAds;
+@interface HyBidGAMMRectCustomEvent : HyBidGAMBannerCustomEvent
 
-@interface HyBidAdMobMediationNativeAd : NSObject <GADMediatedUnifiedNativeAd>
-
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithHyBidNativeAd:(HyBidNativeAd *)nativeAd
-                nativeAdViewAdOptions:(GADNativeAdViewAdOptions *)nativeAdViewAdOptions NS_DESIGNATED_INITIALIZER;
 @end
+
