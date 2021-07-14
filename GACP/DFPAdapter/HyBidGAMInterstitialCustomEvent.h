@@ -23,7 +23,6 @@
 #import <Foundation/Foundation.h>
 #import <HyBid/HyBid.h>
 
-
 @import GoogleMobileAds;
 
 @interface HyBidGAMInterstitialCustomEvent : NSObject <GADCustomEventInterstitial>

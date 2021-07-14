@@ -22,7 +22,6 @@
 
 #import "HyBidGADRewardedCustomEvent.h"
 #import "HyBidGADUtils.h"
-#import <HyBid/HyBid.h>
 
 typedef id<GADMediationRewardedAdEventDelegate> _Nullable(^HyBidGADRewardedCustomEventCompletionBlock)(_Nullable id<GADMediationRewardedAd> ad,
                                                                                                                   NSError *_Nullable error);
@@ -40,7 +39,7 @@ typedef id<GADMediationRewardedAdEventDelegate> _Nullable(^HyBidGADRewardedCusto
 }
 
 - (void)invokeFailWithMessage:(NSString *)message {
-    [HyBidLogger errorLogFromClass:NSStringFromClass([self class]) methodName:NSStringFromSelector(_cmd) message:message];
+    [HyBidLogger errorLogFromClass:NSStringFromClass([self class]) fromMethod:NSStringFromSelector(_cmd) withMessage:message];
     self.completionBlock(nil, [NSError errorWithDomain:message code:0 userInfo:nil]);
     [self.delegate didFailToPresentWithError:[NSError errorWithDomain:message code:0 userInfo:nil]];
 }
