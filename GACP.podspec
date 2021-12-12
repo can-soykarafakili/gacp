@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "GACP"
-  spec.version      = "0.1.6"
+  spec.version      = "0.1.7"
   spec.summary      = "Test iOS adapter for Google Mobile Ads"
   spec.description = <<-DESC
                      HyBid leverages first-look prebid technology to maximize yield for the publishers across
@@ -43,9 +43,6 @@ Pod::Spec.new do |spec|
   spec.source_files = 'GACP/**/*.{swift,h,m}'
   spec.static_framework = true
 
-  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
-  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
-
-  spec.dependency 'HyBid', '2.8.0-beta2'
+  spec.dependency 'HyBid', '2.8.0'
   spec.dependency 'Google-Mobile-Ads-SDK', '~> 8.0'
 end
